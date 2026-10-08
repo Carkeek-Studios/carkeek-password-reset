@@ -4,7 +4,7 @@ Tags:               password reset, shortcode, login
 Requires at least:  6.1
 Tested up to:        6.7
 Requires PHP:        7.0
-Stable tag:          1.0.0
+Stable tag:          1.0.1
 License:             GPL-2.0-or-later
 License URI:         https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,10 @@ Built entirely on WordPress core's own `retrieve_password()`, `check_password_re
 2. Activate. A page at the `reset-password` slug is created automatically with the shortcode already inserted, if one doesn't already exist.
 
 == Changelog ==
+
+= 1.0.1 =
+* Fix: emailed reset link showed the email request form on hosts whose edge cache strips unrecognized cookies (e.g. Cloudways Varnish). The set-password form now renders directly from the link, with the key kept out of Referer, history, analytics and caches.
+* Fix: expired/invalid links now show the expired/invalid message even when ProfilePress is active.
 
 = 1.0.0 =
 * Initial release.

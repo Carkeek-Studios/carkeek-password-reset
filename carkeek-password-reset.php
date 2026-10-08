@@ -8,7 +8,7 @@
  * Primary Branch: main
  * Description: Shortcode-based password reset flow (request + set new password) that runs on a themed page instead of wp-login.php, built on WordPress core's own password-reset functions.
  * Author: Patty O'Hara, Carkeek Studios
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author URI: https://carkeekstudios.com/
  * Text Domain: carkeek-password-reset
  */
