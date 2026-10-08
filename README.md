@@ -28,7 +28,8 @@ Every template lives in `templates/` and can be overridden without touching this
 ## Security notes
 
 - The request form's response never reveals whether the submitted email matched an account — same wording, same behavior either way.
-- The "set new password" step keeps the reset key out of the page URL/history/Referer headers, using the same cookie-handoff pattern `wp-login.php` uses internally.
+- The "set new password" form is rendered straight from the emailed link (no cookie handoff like `wp-login.php` uses; edge caches such as Cloudways Varnish strip unrecognized cookies, which broke that handoff in production). On the reset page the key is kept out of Referer headers (`Referrer-Policy: no-referrer`), out of browser history and analytics `page_location` (`history.replaceState` printed first in `<head>`), and out of page caches (`nocache_headers()` + `DONOTCACHEPAGE`).
+- An emailed link with a bad key redirects to `?reset=invalidkey` / `?reset=expiredkey` (key dropped from the URL) and shows the invalid/expired-link message. This check runs on `wp` at priority 9 so it beats ProfilePress (priority 10), which would otherwise bounce bad keys to its own `?error=invalidkey` URL.
 - Both forms are nonce-protected.
 
 See `docs/plans/` for the original planning document and full technical rationale.
